@@ -1,0 +1,51 @@
+.price-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.1rem 1.25rem;
+  transition: border-color 0.4s ease;
+}
+
+.price-card.up   { border-color: color-mix(in srgb, var(--green) 40%, var(--border)); }
+.price-card.down { border-color: color-mix(in srgb, var(--red)   40%, var(--border)); }
+
+.card-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
+}
+
+.card-ticker {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.05em;
+}
+
+.card-change {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.card-change.up   { color: var(--green); }
+.card-change.down { color: var(--red); }
+
+.card-name {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-price {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}

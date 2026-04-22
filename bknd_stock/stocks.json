@@ -1,0 +1,28 @@
+{
+  "stocks": [
+    {
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "alert_threshold_pct": 0.5
+    },
+    {
+      "ticker": "TSLA",
+      "name": "Tesla Inc.",
+      "alert_threshold_pct": 1.0
+    },
+    {
+      "ticker": "MSFT",
+      "name": "Microsoft Corp.",
+      "alert_threshold_pct": 0.5
+    },
+    {
+      "ticker": "GOOGL",
+      "name": "Alphabet Inc.",
+      "alert_threshold_pct": 0.5
+    }
+  ],
+  "settings": {
+    "poll_interval_seconds": 30,
+    "news_fetch_interval_seconds": 300
+  }
+}
