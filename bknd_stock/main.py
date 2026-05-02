@@ -1,3 +1,6 @@
+# CLI entry point — run this directly to monitor stocks in the terminal (no web server).
+# Uses Rich for colored console output. For the web dashboard, use serve.py instead.
+
 import time
 from datetime import datetime
 
@@ -12,7 +15,7 @@ console = Console()
 
 
 def main() -> None:
-    stocks, settings = load_config()
+    stocks, settings, api_key = load_config()
     poll_interval: int = settings["poll_interval_seconds"]
     news_interval: int = settings["news_fetch_interval_seconds"]
 
@@ -22,7 +25,6 @@ def main() -> None:
         f"polling every [cyan]{poll_interval}s[/cyan]\n"
     )
 
-    previous_prices: dict[str, float] = {}
     last_news_fetch: float = 0.0
 
     while True:
@@ -30,14 +32,11 @@ def main() -> None:
             now = time.time()
             timestamp = datetime.now().strftime("%H:%M:%S")
 
-            current_prices = fetch_prices(stocks)
-            display_price_table(stocks, current_prices, timestamp)
+            stocks = fetch_prices(stocks, api_key)
+            display_price_table(stocks, timestamp)
 
-            if previous_prices:
-                for alert in detect_alerts(stocks, previous_prices, current_prices):
-                    display_price_alert(alert)
-
-            previous_prices = current_prices
+            for alert in detect_alerts(stocks):
+                display_price_alert(alert)
 
             if now - last_news_fetch >= news_interval:
                 news = fetch_news(stocks)
@@ -50,6 +49,7 @@ def main() -> None:
             console.print("\n[yellow]Monitor stopped.[/yellow]")
             break
         except Exception as e:
+            # Keep running after transient errors (network blip, bad ticker, etc.)
             console.print(f"[red]Error: {e}[/red]")
             time.sleep(poll_interval)
 

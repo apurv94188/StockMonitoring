@@ -1,9 +1,17 @@
+# Loads stocks.json and returns typed config objects.
+# All other modules import from here — never read stocks.json directly.
+
 import json
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
 
 from .models import StockWatch
 
 _STOCKS_FILE = Path(__file__).parent.parent / "stocks.json"
+
+load_dotenv(Path(__file__).parent / ".env")
 
 _DEFAULTS = {
     "poll_interval_seconds": 30,
@@ -11,10 +19,12 @@ _DEFAULTS = {
 }
 
 
-def load_config() -> tuple[list[StockWatch], dict]:
+def load_config() -> tuple[list[StockWatch], dict, str]:
     with open(_STOCKS_FILE) as f:
         data = json.load(f)
 
     stocks = [StockWatch(**s) for s in data["stocks"]]
     settings = {**_DEFAULTS, **data.get("settings", {})}
-    return stocks, settings
+
+    api_key = os.environ["FINNHUB_API_KEY"]
+    return stocks, settings, api_key

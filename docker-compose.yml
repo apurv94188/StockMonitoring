@@ -1,0 +1,16 @@
+services:
+  backend:
+    build: ./bknd_stock
+    platform: linux/arm64
+    restart: unless-stopped
+    volumes:
+      - ./bknd_stock/stocks.json:/app/stocks.json
+
+  frontend:
+    build: ./frtnd_stock
+    platform: linux/arm64
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend

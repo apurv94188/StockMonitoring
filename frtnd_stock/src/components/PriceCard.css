@@ -49,3 +49,10 @@
   color: var(--text);
   letter-spacing: -0.02em;
 }
+
+.card-timestamp {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}

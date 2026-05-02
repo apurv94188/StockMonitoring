@@ -1,3 +1,18 @@
+## Cloudflared Tunnel
+# /home/aspi/.cloudflared/cert.pem
+
+# aspi@arsenicnpi:~ $ cloudflared tunnel create cloudflare_nautanki_tunnel
+# Tunnel credentials written to /home/aspi/.cloudflared/d936c493-8d35-40d4-abd0-5d2977804cb3.json. cloudflared chose this file based on where your origin certificate was found. Keep this file secret. To revoke these credentials, delete the tunnel.
+
+# Created tunnel vaqnixpi with id d936c493-8d35-40d4-abd0-5d2977804cb3
+
+# cloudflared tunnel route dns vaqnixpi stock.vaqnix.xyz
+# aspi@arsenicnpi:~ $ cloudflared tunnel route dns vaqnixpi stock.vaqnix.xyz
+# 2026-04-28T03:13:56Z INF Added CNAME stock.vaqnix.xyz which will route to this tunnel tunnelID=3dd0ffc7-8878-44ab-9b4a-be32c85b3bd6
+
+# cloudflared tunnel route dns vaqnixpi bknd_stock.vaqnix.xyz
+# 2026-04-28T03:14:49Z INF Added CNAME bknd_stock.vaqnix.xyz which will route to this tunnel tunnelID=3dd0ffc7-8878-44ab-9b4a-be32c85b3bd6
+
 # frtnd-stock
 
 Real-time stock monitor dashboard built with React + Vite. Streams live prices, threshold alerts, and news from the `bknd-stock` backend via Server-Sent Events.

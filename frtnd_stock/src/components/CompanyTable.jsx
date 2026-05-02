@@ -12,7 +12,10 @@ function timeAgo(published) {
 }
 
 function CompanyRow({ stock, news }) {
-  const { ticker, name, price, change_pct } = stock
+  const { ticker, name, price, change_pct, current_price_timestamp } = stock
+  const timeLabel = current_price_timestamp
+    ? new Date(current_price_timestamp).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+    : null
   const hasChange = change_pct != null
   const up = change_pct > 0
   const sign = up ? '+' : ''
@@ -26,7 +29,8 @@ function CompanyRow({ stock, news }) {
         <span className="row-company-name">{name}</span>
       </div>
       <div className="col-price">
-        ${price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+        <span>${price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+        {timeLabel && <span className="row-timestamp">{timeLabel}</span>}
       </div>
       <div className="col-change">
         {hasChange && (

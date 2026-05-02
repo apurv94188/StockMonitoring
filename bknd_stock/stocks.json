@@ -1,24 +1,14 @@
 {
   "stocks": [
     {
-      "ticker": "AAPL",
-      "name": "Apple Inc.",
+      "ticker": "WMT",
+      "name": "Walmart Inc.",
       "alert_threshold_pct": 0.5
     },
     {
-      "ticker": "TSLA",
-      "name": "Tesla Inc.",
+      "ticker": "SOFI",
+      "name": "SoFi Technologies Inc.",
       "alert_threshold_pct": 1.0
-    },
-    {
-      "ticker": "MSFT",
-      "name": "Microsoft Corp.",
-      "alert_threshold_pct": 0.5
-    },
-    {
-      "ticker": "GOOGL",
-      "name": "Alphabet Inc.",
-      "alert_threshold_pct": 0.5
     }
   ],
   "settings": {
