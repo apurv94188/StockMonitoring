@@ -12,7 +12,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 
-from .config import load_config
+from .alerter import send_pushover_alert
+from .config import load_config, load_pushover_keys
 from .monitor import detect_alerts, fetch_prices
 from .news import fetch_news
 from .models import StockWatch
@@ -44,6 +45,8 @@ async def _monitor_loop() -> None:
     # Background task that runs for the lifetime of the server.
     # Fetches prices on every poll cycle and news on a slower interval.
     stocks, settings, api_key = load_config()
+    pushover_token, pushover_user_key = load_pushover_keys()
+    fired_alerts: set = set()  # (ticker, alert_type, threshold) — persists across poll cycles
     poll_interval: int = settings["poll_interval_seconds"]
     news_interval: int = settings["news_fetch_interval_seconds"]
     last_news_fetch: float = 0.0
@@ -77,13 +80,17 @@ async def _monitor_loop() -> None:
             await _broadcast("prices", price_data)
 
             # Detect threshold breaches and push individual "alert" events
-            for alert in detect_alerts(stocks):
+            for alert in detect_alerts(stocks, fired_alerts):
+                if pushover_token and pushover_user_key:
+                    loop.run_in_executor(None, send_pushover_alert, alert, pushover_token, pushover_user_key)
                 alert_dict = {
                     "ticker": alert.ticker,
                     "name": alert.name,
                     "current_price": alert.current_price,
                     "previous_price": alert.previous_closed_price,
                     "change_pct": alert.change_pct,
+                    "alert_type": alert.alert_type,
+                    "threshold": alert.threshold,
                     "timestamp": alert.timestamp.isoformat(),
                 }
                 # appendleft keeps the deque sorted newest-first

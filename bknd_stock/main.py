@@ -6,8 +6,8 @@ from datetime import datetime
 
 from rich.console import Console
 
-from bknd_stock.alerter import display_news, display_price_alert, display_price_table
-from bknd_stock.config import load_config
+from bknd_stock.alerter import display_news, display_price_alert, display_price_table, send_pushover_alert
+from bknd_stock.config import load_config, load_pushover_keys
 from bknd_stock.monitor import detect_alerts, fetch_prices
 from bknd_stock.news import fetch_news
 
@@ -16,6 +16,8 @@ console = Console()
 
 def main() -> None:
     stocks, settings, api_key = load_config()
+    pushover_token, pushover_user_key = load_pushover_keys()
+    fired_alerts: set = set()  # (ticker, alert_type, threshold) — persists across poll cycles
     poll_interval: int = settings["poll_interval_seconds"]
     news_interval: int = settings["news_fetch_interval_seconds"]
 
@@ -35,8 +37,10 @@ def main() -> None:
             stocks = fetch_prices(stocks, api_key)
             display_price_table(stocks, timestamp)
 
-            for alert in detect_alerts(stocks):
+            for alert in detect_alerts(stocks, fired_alerts):
                 display_price_alert(alert)
+                if pushover_token and pushover_user_key:
+                    send_pushover_alert(alert, pushover_token, pushover_user_key)
 
             if now - last_news_fetch >= news_interval:
                 news = fetch_news(stocks)

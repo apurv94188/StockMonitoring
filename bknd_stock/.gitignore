@@ -8,3 +8,6 @@ wheels/
 
 # Virtual environments
 .venv
+
+# root files and folders
+do_not_share.md

@@ -3,12 +3,23 @@
     {
       "ticker": "WMT",
       "name": "Walmart Inc.",
-      "alert_threshold_pct": 0.5
+      "alert_pct_thresholds": [
+        {"threshold": 0.5, "buffer": 0.3},
+        {"threshold": 2.0, "buffer": 0.5},
+        {"threshold": 3.0, "buffer": 0.5}
+      ],
+      "alert_price_above": [],
+      "alert_price_below": []
     },
     {
       "ticker": "SOFI",
       "name": "SoFi Technologies Inc.",
-      "alert_threshold_pct": 1.0
+      "alert_pct_thresholds": [
+        {"threshold": 1.0, "buffer": 0.3},
+        {"threshold": 2.0, "buffer": 0.5}
+      ],
+      "alert_price_above": [],
+      "alert_price_below": []
     }
   ],
   "settings": {

@@ -28,3 +28,9 @@ def load_config() -> tuple[list[StockWatch], dict, str]:
 
     api_key = os.environ["FINNHUB_API_KEY"]
     return stocks, settings, api_key
+
+
+def load_pushover_keys() -> tuple[str | None, str | None]:
+    token = os.environ.get("PUSHOVER_API_KEY") or None
+    user_key = os.environ.get("PUSHOVER_USER_KEY") or None
+    return token, user_key
