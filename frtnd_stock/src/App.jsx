@@ -9,11 +9,11 @@ export default function App() {
   // prices: { [ticker]: { ticker, name, price, change_pct } }
   // news:   array of { title, link, published, source, ticker }
   // connected: true while the SSE connection is open
-  const { prices, news, connected, lastUpdated } = useStockStream()
+  const { prices, news, connected, lastUpdated, backendVersion } = useStockStream()
 
   return (
     <div className="app">
-      <Header connected={connected} lastUpdated={lastUpdated} />
+      <Header connected={connected} lastUpdated={lastUpdated} backendVersion={backendVersion} />
       <CompanyTable prices={prices} news={news} />
     </div>
   )

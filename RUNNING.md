@@ -11,3 +11,6 @@ docker save stock_tracking-backend stock_tracking-frontend | ssh aspi@100.64.115
 ssh aspi@100.64.115.49 "cd ~/stock_tracking && docker compose up -d"
 
 # Docker Compose will detect the new images and recreate only the updated containers. The stocks.json volume is preserved.
+
+# to copy stocks.json from local to raspberry pi
+scp bknd_stock/stocks.json aspi@100.64.115.49:~/stock_tracking/bknd_stock/

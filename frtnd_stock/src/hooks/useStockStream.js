@@ -6,9 +6,14 @@ export function useStockStream() {
   const [news, setNews] = useState([])
   const [connected, setConnected] = useState(false)
   const [lastUpdated, setLastUpdated] = useState(null)
+  const [backendVersion, setBackendVersion] = useState(null)
 
   useEffect(() => {
     const es = new EventSource('/api/stream')
+
+    es.addEventListener('version', (e) => {
+      setBackendVersion(JSON.parse(e.data).version)
+    })
 
     es.addEventListener('prices', (e) => {
       setPrices(JSON.parse(e.data))
@@ -35,5 +40,5 @@ export function useStockStream() {
     return () => es.close()
   }, [])
 
-  return { prices, alerts, news, connected, lastUpdated }
+  return { prices, alerts, news, connected, lastUpdated, backendVersion }
 }

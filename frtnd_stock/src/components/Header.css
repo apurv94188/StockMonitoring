@@ -21,6 +21,25 @@
   gap: 0.5rem;
 }
 
+.header-versions {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-right: 0.75rem;
+}
+
+.version-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.version-sep {
+  font-size: 10px;
+  color: var(--border);
+}
+
 .header-time {
   font-family: var(--font-mono);
   font-size: 12px;

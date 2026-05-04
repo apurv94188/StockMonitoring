@@ -20,6 +20,38 @@
       ],
       "alert_price_above": [],
       "alert_price_below": []
+    },
+    {
+      "ticker": "RBLX",
+      "name": "Roblox Corp.",
+      "alert_pct_thresholds": [
+        {"threshold": 2.0, "buffer": 0.5},
+        {"threshold": 4.0, "buffer": 0.7}
+      ],
+      "alert_price_above": [
+        {"level": 48, "buffer": 2},
+        {"level": 52, "buffer": 3}
+      ],
+      "alert_price_below": [
+        {"level": 41.5, "buffer": 2.5},
+        {"level": 39, "buffer": 1.5}
+      ]
+    },
+    {
+      "ticker": "QBTS",
+      "name": "D-Wave Quantum Inc.",
+      "alert_pct_thresholds": [
+        {"threshold": 3.0, "buffer": 1},
+        {"threshold": 5.0, "buffer": 1.5}
+      ],
+      "alert_price_above": [
+        {"level": 22, "buffer": 1},
+        {"level": 25, "buffer": 1}
+      ],
+      "alert_price_below": [
+        {"level": 16, "buffer": 2},
+        {"level": 14, "buffer": 1}
+      ]
     }
   ],
   "settings": {

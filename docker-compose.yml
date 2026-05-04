@@ -3,6 +3,8 @@ services:
     build: ./bknd_stock
     platform: linux/arm64
     restart: unless-stopped
+    env_file:
+      - ./bknd_stock/bknd_stock/.env
     volumes:
       - ./bknd_stock/stocks.json:/app/stocks.json
 

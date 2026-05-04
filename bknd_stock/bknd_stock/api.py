@@ -15,6 +15,7 @@ from fastapi.responses import StreamingResponse
 from .alerter import send_pushover_alert
 from .config import load_config, load_pushover_keys
 from .monitor import detect_alerts, fetch_prices
+from .version import VERSION
 from .news import fetch_news
 from .models import StockWatch
 
@@ -44,7 +45,11 @@ async def _broadcast(event_type: str, data) -> None:
 async def _monitor_loop() -> None:
     # Background task that runs for the lifetime of the server.
     # Fetches prices on every poll cycle and news on a slower interval.
-    stocks, settings, api_key = load_config()
+    try:
+        stocks, settings, api_key = load_config()
+    except Exception as e:
+        print(f"[monitor] FATAL: config failed — {e}. Check that FINNHUB_API_KEY is set.")
+        return
     pushover_token, pushover_user_key = load_pushover_keys()
     fired_alerts: set = set()  # (ticker, alert_type, threshold) — persists across poll cycles
     poll_interval: int = settings["poll_interval_seconds"]
@@ -161,6 +166,7 @@ app.add_middleware(
 def get_status():
     # One-shot snapshot of current state — useful for debugging without opening an SSE stream
     return {
+        "version": VERSION,
         "prices": _state["prices"],
         "alerts": list(_state["alerts"]),
         "news": _state["news"],
@@ -176,6 +182,7 @@ async def stream():
 
     async def generate():
         try:
+            yield f"event: version\ndata: {json.dumps({'version': VERSION})}\n\n"
             # Immediately send whatever state is already known so the UI isn't blank
             # while waiting for the next poll cycle to fire
             if _state["prices"]:
