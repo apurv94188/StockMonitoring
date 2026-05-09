@@ -79,3 +79,13 @@
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.5; }
 }
+
+/* ── Mobile ────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Drop the "updated HH:MM:SS" — price timestamps on each row serve the same purpose */
+  .header-time { display: none; }
+
+  .header-versions {
+    margin-right: 0.4rem;
+  }
+}

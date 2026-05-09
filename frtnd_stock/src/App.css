@@ -3,3 +3,9 @@
   margin: 0 auto;
   padding: 0 1.5rem 3rem;
 }
+
+@media (max-width: 640px) {
+  .app {
+    padding: 0 0.75rem 2rem;
+  }
+}

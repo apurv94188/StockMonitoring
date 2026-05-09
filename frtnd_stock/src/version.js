@@ -1,1 +1,1 @@
-export const FRONTEND_VERSION = 2
+export const FRONTEND_VERSION = 3

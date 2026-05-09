@@ -28,16 +28,18 @@ function CompanyRow({ stock, news }) {
         <span className="row-ticker">{ticker}</span>
         <span className="row-company-name">{name}</span>
       </div>
-      <div className="col-price">
-        <span>${price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-        {timeLabel && <span className="row-timestamp">{timeLabel}</span>}
-      </div>
-      <div className="col-change">
-        {hasChange && (
-          <span className={changeClass}>
-            {arrow} {sign}{change_pct.toFixed(2)}%
-          </span>
-        )}
+      <div className="col-price-change">
+        <div className="col-price">
+          <span>${price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+          {timeLabel && <span className="row-timestamp">{timeLabel}</span>}
+        </div>
+        <div className="col-change">
+          {hasChange && (
+            <span className={changeClass}>
+              {arrow} {sign}{change_pct.toFixed(2)}%
+            </span>
+          )}
+        </div>
       </div>
       <div className="col-news">
         {news.length === 0 ? (

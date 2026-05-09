@@ -1,17 +1,6 @@
 {
   "stocks": [
     {
-      "ticker": "WMT",
-      "name": "Walmart Inc.",
-      "alert_pct_thresholds": [
-        {"threshold": 0.5, "buffer": 0.3},
-        {"threshold": 2.0, "buffer": 0.5},
-        {"threshold": 3.0, "buffer": 0.5}
-      ],
-      "alert_price_above": [],
-      "alert_price_below": []
-    },
-    {
       "ticker": "SOFI",
       "name": "SoFi Technologies Inc.",
       "alert_pct_thresholds": [
@@ -41,7 +30,7 @@
       "ticker": "QBTS",
       "name": "D-Wave Quantum Inc.",
       "alert_pct_thresholds": [
-        {"threshold": 3.0, "buffer": 1},
+        {"threshold": 3.0, "buffer": 1.0},
         {"threshold": 5.0, "buffer": 1.5}
       ],
       "alert_price_above": [
@@ -51,6 +40,74 @@
       "alert_price_below": [
         {"level": 16, "buffer": 2},
         {"level": 14, "buffer": 1}
+      ]
+    },
+    {
+      "ticker": "PLTR",
+      "name": "Palantir Technologies Inc.",
+      "alert_pct_thresholds": [
+        {"threshold": 3.0, "buffer": 0.8},
+        {"threshold": 5.0, "buffer": 1.2}
+      ],
+      "alert_price_above": [],
+      "alert_price_below": []
+    },
+    {
+      "ticker": "ORCL",
+      "name": "Oracle Corp.",
+      "alert_pct_thresholds": [
+        {"threshold": 2.5, "buffer": 1},
+        {"threshold": 4.0, "buffer": 1}
+      ],
+      "alert_price_above": [],
+      "alert_price_below": []
+    },
+    {
+      "ticker": "MU",
+      "name": "Micron Technology Inc.",
+      "alert_pct_thresholds": [
+        {"threshold": 3.0, "buffer": 0.5},
+        {"threshold": 5.0, "buffer": 0.8}
+      ],
+      "alert_price_above": [
+        {"level": 590, "buffer": 10},
+        {"level": 610, "buffer": 10}
+      ],
+      "alert_price_below": [
+        {"level": 450, "buffer": 10},
+        {"level": 380, "buffer": 10}
+      ]
+    },
+    {
+      "ticker": "INTC",
+      "name": "Intel Corp.",
+      "alert_pct_thresholds": [
+        {"threshold": 4.0, "buffer": 0.5},
+        {"threshold": 5.5, "buffer": 0.7}
+      ],
+      "alert_price_above": [
+        {"level": 105, "buffer": 5},
+        {"level": 120, "buffer": 5}
+      ],
+      "alert_price_below": [
+        {"level": 89, "buffer": 5},
+        {"level": 79, "buffer": 5}
+      ]
+    },
+    {
+      "ticker": "BX",
+      "name": "Blackstone Inc.",
+      "alert_pct_thresholds": [
+        {"threshold": 3.5, "buffer": 0.7},
+        {"threshold": 5.0, "buffer": 0.8}
+      ],
+      "alert_price_above": [
+        {"level": 140, "buffer": 5},
+        {"level": 150, "buffer": 5}
+      ],
+      "alert_price_below": [
+        {"level": 115, "buffer": 5},
+        {"level": 108, "buffer": 5}
       ]
     }
   ],
